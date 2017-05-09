@@ -1,5 +1,8 @@
 package tszs.itfreer.webview;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,13 +23,19 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_PRIVATE);
+        String url= sp.getString("url","https://www.songliuchen.com");
+        if(url == null || url.trim().length()==0)
+        {
+            url="https://www.songliuchen.com";
+        }
         webview = (WebView)findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setBuiltInZoomControls(false);
         webview.getSettings().setDisplayZoomControls(false);
         webview.requestFocus();
         webview.setWebViewClient(new TszsWebViewClient());
-        webview.loadUrl("https://www.songliuchen.com/");
+        webview.loadUrl(url);
     }
 
     @Override
@@ -42,7 +51,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.action_settings)
         {
-            return true;
+            Intent intent = new Intent(MainActivity.this,SettingActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
