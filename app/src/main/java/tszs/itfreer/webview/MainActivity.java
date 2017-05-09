@@ -24,18 +24,21 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_PRIVATE);
-        String url= sp.getString("url","https://www.songliuchen.com");
-        if(url == null || url.trim().length()==0)
-        {
-            url="https://www.songliuchen.com";
-        }
+        String url= sp.getString("url","blank");
         webview = (WebView)findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.getSettings().setBuiltInZoomControls(false);
+        webview.getSettings().setSupportZoom(true);
+        webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
+        //扩大比例的缩放
+        webview.getSettings().setUseWideViewPort(true);
+        //自适应屏幕
+        webview.getSettings().setLoadWithOverviewMode(true);
+
         webview.requestFocus();
         webview.setWebViewClient(new TszsWebViewClient());
-        webview.loadUrl(url);
+        if(!url.equals("blank"))
+            webview.loadUrl(url);
     }
 
     @Override
@@ -75,9 +78,10 @@ public class MainActivity extends AppCompatActivity
     {
         if(requestCode == 100 && resultCode ==100)
         {
-            SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_WORLD_READABLE);
-            String url = sp.getString("url", "https://www.songliuchen.com");
-            webview.loadUrl(url);
+            SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_PRIVATE);
+            String url = sp.getString("url", "blank");
+            if(!url.equals("blank"))
+                webview.loadUrl(url);
         }
     }
     public class TszsWebViewClient extends WebViewClient

@@ -29,7 +29,7 @@ public class SettingActivity extends AppCompatActivity
                     TextView textview=(TextView) findViewById(R.id.textView);
                     URL urlobj = new URL(textview.getText().toString());
 
-                    SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_WORLD_READABLE);
+                    SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("url", textview.getText().toString());
                     editor.commit();
