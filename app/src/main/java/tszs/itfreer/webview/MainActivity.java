@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings)
         {
             Intent intent = new Intent(MainActivity.this,SettingActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,100);
         }
 
         return super.onOptionsItemSelected(item);
@@ -69,6 +69,14 @@ public class MainActivity extends AppCompatActivity
         return super.onKeyDown(keyCode, event);
     }
 
+    // 回调方法，从第二个页面回来的时候会执行这个方法
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_WORLD_READABLE);
+        String url= sp.getString("url","https://www.songliuchen.com");
+        webview.loadUrl(url);
+    }
     public class TszsWebViewClient extends WebViewClient
     {
     }

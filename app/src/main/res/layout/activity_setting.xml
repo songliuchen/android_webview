@@ -13,6 +13,7 @@
 
     <EditText
         android:text="https://www.songliuchen.com"
+        android:hint="https://www.songliuchen.com"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/textView"/>

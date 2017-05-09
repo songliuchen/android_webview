@@ -29,9 +29,10 @@ public class SettingActivity extends AppCompatActivity
                     TextView textview=(TextView) findViewById(R.id.textView);
                     URL urlobj = new URL(textview.getText().toString());
 
-                    SharedPreferences sp = SettingActivity.this.getSharedPreferences("tszs_webview", Context.MODE_PRIVATE);
-                    sp.edit().putString("url", textview.getText().toString());
-                    sp.edit().commit();
+                    SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_WORLD_READABLE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("url", textview.getText().toString());
+                    editor.commit();
 
                     Toast toast=Toast.makeText(getApplicationContext(), "地址修改成功！", Toast.LENGTH_SHORT);
                     toast.show();
