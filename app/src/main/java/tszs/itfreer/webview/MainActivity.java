@@ -73,9 +73,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_WORLD_READABLE);
-        String url= sp.getString("url","https://www.songliuchen.com");
-        webview.loadUrl(url);
+        if(requestCode == 100 && resultCode ==100)
+        {
+            SharedPreferences sp = getSharedPreferences("tszs_webview", Context.MODE_WORLD_READABLE);
+            String url = sp.getString("url", "https://www.songliuchen.com");
+            webview.loadUrl(url);
+        }
     }
     public class TszsWebViewClient extends WebViewClient
     {

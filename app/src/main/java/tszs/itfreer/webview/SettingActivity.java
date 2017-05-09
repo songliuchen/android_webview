@@ -36,6 +36,7 @@ public class SettingActivity extends AppCompatActivity
 
                     Toast toast=Toast.makeText(getApplicationContext(), "地址修改成功！", Toast.LENGTH_SHORT);
                     toast.show();
+                    setResult(100);
                     SettingActivity.this.finish();
                 }
                 catch (MalformedURLException e)
